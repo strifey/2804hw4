@@ -1,5 +1,5 @@
-#ifndef register_h
-#define register_h
+#ifndef storage_h
+#define storage_h
 
 #include <string>
 #include <sstream>
