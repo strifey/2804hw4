@@ -26,6 +26,8 @@ int main(int argc, char*argv[]){
 		Processor proc(10,1000,1000);
 		proc.load(fr);
 		cout<<proc.run()<<endl;
+		//Uncomment out line below to see register contents of processor before running the next one.
+		//proc.dump()
 	}
 	return 0;
 }
