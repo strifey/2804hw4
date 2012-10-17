@@ -4,16 +4,86 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "processor.h"
+#include "storage.h"
 
 class Instruction {
-	private:
+	protected:
 		unsigned int _reg_a, _reg_b, _offset;
 	public:
 		Instruction(unsigned int reg_a, unsigned int reg_b, unsigned int offset):
 			_reg_a(reg_a), _reg_b(reg_b), _offset(offset) {}
-		const static Instruction parse_next_instr(unsigned int instruction);
-		bool execute(Processor proc)=0;
+		virtual bool execute(StorageFile& regs, StorageFile& mem, Storage& PC)=0;
+		static Instruction* decode(unsigned int instr);
+		virtual ~Instruction(){};
 };
 
+class HaltInstr : public Instruction{
+	public:
+		HaltInstr(unsigned int reg_a, unsigned int reg_b, unsigned int offset)
+			:Instruction(reg_a, reg_b, offset) {}
+		bool execute(StorageFile& regs, StorageFile& mem, Storage& PC){return true;}
+};
+
+class SetImmInstr : public Instruction{
+	public:
+		SetImmInstr(unsigned int reg_a, unsigned int reg_b, unsigned int offset)
+			:Instruction(reg_a, reg_b, offset) {}
+		bool execute(StorageFile& regs, StorageFile& mem, Storage& PC);
+};
+
+class AddImmInstr : public Instruction{
+	public:
+		AddImmInstr(unsigned int reg_a, unsigned int reg_b, unsigned int offset)
+			:Instruction(reg_a, reg_b, offset) {}
+		bool execute(StorageFile& regs, StorageFile& mem, Storage& PC);
+};
+
+class MultImmInstr : public Instruction{
+	public:
+		MultImmInstr(unsigned int reg_a, unsigned int reg_b, unsigned int offset)
+			:Instruction(reg_a, reg_b, offset) {}
+		bool execute(StorageFile& regs, StorageFile& mem, Storage& PC);
+};
+
+class SetRegInstr : public Instruction{
+	public:
+		SetRegInstr(unsigned int reg_a, unsigned int reg_b, unsigned int offset)
+			:Instruction(reg_a, reg_b, offset) {}
+		bool execute(StorageFile& regs, StorageFile& mem, Storage& PC);
+};
+
+class AddRegInstr : public Instruction{
+	public:
+		AddRegInstr(unsigned int reg_a, unsigned int reg_b, unsigned int offset)
+			:Instruction(reg_a, reg_b, offset) {}
+		bool execute(StorageFile& regs, StorageFile& mem, Storage& PC);
+};
+
+class MultRegInstr : public Instruction{
+	public:
+		MultRegInstr(unsigned int reg_a, unsigned int reg_b, unsigned int offset)
+			:Instruction(reg_a, reg_b, offset) {}
+		bool execute(StorageFile& regs, StorageFile& mem, Storage& PC);
+};
+
+class GetMemInstr : public Instruction{
+	public:
+		GetMemInstr(unsigned int reg_a, unsigned int reg_b, unsigned int offset)
+			:Instruction(reg_a, reg_b, offset) {}
+		bool execute(StorageFile& regs, StorageFile& mem, Storage& PC);
+};
+
+class SetMemInstr : public Instruction{
+	public:
+		SetMemInstr(unsigned int reg_a, unsigned int reg_b, unsigned int offset)
+			:Instruction(reg_a, reg_b, offset) {}
+		bool execute(StorageFile& regs, StorageFile& mem, Storage& PC);
+};
+
+class BranchInstr : public Instruction{
+	public:
+		BranchInstr(unsigned int reg_a, unsigned int reg_b, unsigned int offset)
+			:Instruction(reg_a, reg_b, offset) {}
+		bool execute(StorageFile& regs, StorageFile& mem, Storage& PC);
+};
 #endif

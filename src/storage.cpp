@@ -10,27 +10,27 @@ std::string StorageFile::to_string(){
 
 Storage& Storage::operator=(const Storage& o){
 	if(&o != this)
-		_val = o.val();
+		_val = o.val()%MAX_VAL;
 	return *this;
 }
 
 Storage& Storage::operator+=(const unsigned int o){
-	_val+=o;
+	_val = (_val + o)%MAX_VAL;
 	return *this;
 }
 
 Storage& Storage::operator+=(const Storage& o){
-	_val+=o.val();
+	_val = (_val+o.val())%MAX_VAL;
 	return *this;
 }
 
 Storage& Storage::operator*=(const unsigned int o){
-	_val*=o;
+	_val = (_val*o)%MAX_VAL;
 	return *this;
 }
 
 Storage& Storage::operator*=(const Storage& o){
-	_val*=o.val();
+	_val = (_val*o.val())%MAX_VAL;
 	return *this;
 }
 

@@ -42,7 +42,8 @@ class StorageFile {
 		int size() {return registers.size();}
 
 		std::string to_string();
-		unsigned int operator[](int index){return registers[index].val();}
+		Storage& operator[](int index){return registers[index];}
+		const Storage& operator[](int index) const {return registers[index];}
 };
 
 #endif
